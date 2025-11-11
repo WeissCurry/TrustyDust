@@ -115,5 +115,3 @@ This project is proprietary and for internal/team use. All rights reserved.
 ---
 
 Made with ❤️ by the TrustyDust team
-```
-```
