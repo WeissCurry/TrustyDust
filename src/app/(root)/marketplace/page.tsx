@@ -1,10 +1,12 @@
+'use client';
+
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import NFTCard from "@/components/NFTCard";
 import { ShoppingBag, Image, Gamepad2, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const Marketplace = () => {
+export default function Marketplace() {
   const [activeTab, setActiveTab] = useState("marketplace");
   const [filter, setFilter] = useState("all");
 
@@ -65,21 +67,24 @@ const Marketplace = () => {
 
           {/* Filters */}
           <div className="flex gap-4 mb-8">
-            {filters.map((filterItem) => (
-              <button
-                key={filterItem.id}
-                onClick={() => setFilter(filterItem.id)}
-                className={cn(
-                  "px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2",
-                  filter === filterItem.id
-                    ? "bg-neon-pink text-primary-foreground glow-pink"
-                    : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-neon-pink/50"
-                )}
-              >
-                <filterItem.icon className="w-5 h-5" />
-                {filterItem.label}
-              </button>
-            ))}
+            {filters.map((filterItem) => {
+              const Icon = filterItem.icon;
+              return (
+                <button
+                  key={filterItem.id}
+                  onClick={() => setFilter(filterItem.id)}
+                  className={cn(
+                    "px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2",
+                    filter === filterItem.id
+                      ? "bg-neon-pink text-primary-foreground glow-pink"
+                      : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-neon-pink/50"
+                  )}
+                >
+                  <Icon className="w-5 h-5" />
+                  {filterItem.label}
+                </button>
+              );
+            })}
           </div>
 
           {/* NFT Grid */}
@@ -92,6 +97,4 @@ const Marketplace = () => {
       </div>
     </div>
   );
-};
-
-export default Marketplace;
+}

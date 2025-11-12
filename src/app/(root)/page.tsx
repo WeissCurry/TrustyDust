@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom";
+'use client';
+
+import Image from "next/image";
+import Link from "next/link";
 import { Network, ShoppingBag, Shield } from "lucide-react";
 import GlowButton from "@/components/GlowButton";
 import StatsCard from "@/components/StatsCard";
 import FeatureCard from "@/components/FeatureCard";
 import Footer from "@/components/Footer";
-import heroImage from "@/assets/hero-cyber.jpg";
 
-const Landing = () => {
+// Gambar sekarang dari public/
+const heroImage = "/hero-cyber.jpg";
+
+export default function Landing() {
   return (
     <div className="min-h-screen cyber-grid">
       {/* Hero Section */}
@@ -14,7 +19,14 @@ const Landing = () => {
         <div className="max-w-5xl mx-auto text-center">
           <div className="relative mb-12 inline-block">
             <div className="w-64 h-64 mx-auto rounded-full overflow-hidden border-4 border-neon-pink glow-pink">
-              <img src={heroImage} alt="Cyber Hero" className="w-full h-full object-cover" />
+              <Image
+                src={heroImage}
+                alt="Cyber Hero"
+                width={256}
+                height={256}
+                className="w-full h-full object-cover"
+                priority // Karena di atas fold
+              />
             </div>
             <div className="absolute -top-4 -right-4 w-24 h-24 bg-neon-cyan rounded-full blur-3xl opacity-50 animate-pulse"></div>
             <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-neon-pink rounded-full blur-3xl opacity-50 animate-pulse"></div>
@@ -30,12 +42,12 @@ const Landing = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
-            <Link to="/feed">
+            <Link href="/feed">
               <GlowButton variant="neon-pink">
                 Explore Feed
               </GlowButton>
             </Link>
-            <Link to="/marketplace">
+            <Link href="/marketplace">
               <GlowButton variant="outline-cyan">
                 Launch App
               </GlowButton>
@@ -82,6 +94,4 @@ const Landing = () => {
       <Footer />
     </div>
   );
-};
-
-export default Landing;
+}

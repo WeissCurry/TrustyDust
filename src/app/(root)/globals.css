@@ -1,10 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import "tailwindcss";
 
 @layer base {
   :root {
@@ -60,15 +54,15 @@ All colors MUST be HSL.
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-glow: box-shadow 0.3s ease, transform 0.3s ease;
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
+  *, *::before, *::after {
+    @apply border;
+    border-color: hsl(var(--border));
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #0f0a1a 0%, #1a0d2e 100%);
     min-height: 100vh;
@@ -80,38 +74,31 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  .glow-pink {
-    box-shadow: var(--glow-pink);
-  }
-  
-  .glow-cyan {
-    box-shadow: var(--glow-cyan);
-  }
-  
-  .glow-purple {
-    box-shadow: var(--glow-purple);
-  }
-  
-  .hover-glow-pink {
+  .glow-pink { box-shadow: var(--glow-pink); }
+  .glow-cyan { box-shadow: var(--glow-cyan); }
+  .glow-purple { box-shadow: var(--glow-purple); }
+
+  .hover-glow-pink,
+  .hover-glow-cyan,
+  .hover-glow-purple {
     transition: var(--transition-glow);
   }
-  
+
   .hover-glow-pink:hover {
     box-shadow: var(--glow-pink);
     transform: translateY(-2px);
   }
-  
-  .hover-glow-cyan {
-    transition: var(--transition-glow);
-  }
-  
   .hover-glow-cyan:hover {
     box-shadow: var(--glow-cyan);
     transform: translateY(-2px);
   }
-  
+  .hover-glow-purple:hover {
+    box-shadow: var(--glow-purple);
+    transform: translateY(-2px);
+  }
+
   .text-gradient-neon {
-    background: linear-gradient(135deg, hsl(300 100% 50%) 0%, hsl(180 100% 50%) 100%);
+    background: var(--gradient-neon);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -122,15 +109,5 @@ All colors MUST be HSL.
       linear-gradient(rgba(255, 0, 255, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
   }
 }
